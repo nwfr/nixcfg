@@ -1,11 +1,11 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 with lib; let
   cfg = config.features.desktop.hyprland;
-in
-{
+in {
   options.features.desktop.hyprland.enable = mkEnableOption "hyprland config";
 
   config = mkIf cfg.enable {
@@ -36,6 +36,7 @@ in
           "wl-paste --type text --watch cliphist store"
           "wl-paste --type image --watch cliphist store"
           "systemctl --user start hyprpolkitagent"
+          "waybar"
           "dunst"
           "hyprpaper"
           "hypridle"
@@ -304,7 +305,7 @@ in
           "opacity 0.80 0.80,class:^(Signal)$"
           "opacity 0.80 0.80,class:^(com.github.unrud.VideoDownloader)$"
           "opacity 1.00 1.00 override,class:^(pcmanfm)$,title:^(Moving files)$"
-          "float, ^(vlc)$"
+          "float, class:^(vlc)$"
           "float, class:ghostty, title:pulsemixer"
           "float, tag:clock, title:^(tty-clock|clock)$"
           "float, tag:skylight"

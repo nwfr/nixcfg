@@ -1,9 +1,10 @@
 { config, ... }: {
   imports = [
-    ./home.nix
+    ../common
     ../features/cli
     ../features/desktop
-    ../common
+    ./home.nix
+
   ];
 
   features = {
@@ -13,6 +14,7 @@
       neofetch.enable = true;
     };
     desktop = {
+      hyprland.enable = true;
       wayland.enable = true;
     };
   };

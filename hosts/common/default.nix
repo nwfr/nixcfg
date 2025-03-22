@@ -1,9 +1,10 @@
 # Common configuration for all hosts
-{ pkgs
-, lib
-, inputs
-, outputs
-, ...
+{
+  pkgs,
+  lib,
+  inputs,
+  outputs,
+  ...
 }: {
   imports = [
     ./users
@@ -11,7 +12,7 @@
   ];
   home-manager = {
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs outputs; };
+    extraSpecialArgs = {inherit inputs outputs;};
   };
   nixpkgs = {
     # You can add overlays here
@@ -52,9 +53,9 @@
     };
     optimise.automatic = true;
     registry =
-      (lib.mapAttrs (_: flake: { inherit flake; }))
-        ((lib.filterAttrs (_: lib.isType "flake")) inputs);
-    nixPath = [ "/etc/nix/path" ];
+      (lib.mapAttrs (_: flake: {inherit flake;}))
+      ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+    nixPath = ["/etc/nix/path"];
   };
   users.defaultUserShell = pkgs.fish;
 }
