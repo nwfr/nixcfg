@@ -19,7 +19,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     dotfiles = {
-      url = "https://github.com/nwfr/nix-flake-dotfiles";
+      url = "git+https://github.com/nwfr/nix-flake-dotfiles";
       flake = false;
     };
   };
