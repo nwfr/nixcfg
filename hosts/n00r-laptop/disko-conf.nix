@@ -15,7 +15,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                extraArgs = ["-BOOT"];
+                extraArgs = ["-n" "BOOT"];
               };
             };
             root = {
