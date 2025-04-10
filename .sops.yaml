@@ -1,0 +1,11 @@
+keys:
+  - &users:
+    - &n00r age1cahvxcvqpd0ektqnff2kaazfvq9nfa34a8arx8f64qdsz55335zqtpsu25
+  - &hosts:
+    - &n00r-laptop age1lxrhq2huk5v9mfg35amtlvcg0wth8fqe6fsknmykdmtxvsfnv96qad729d  
+creation_rules:
+  - path_regex: secrets.yaml$
+    key_groups:
+      - age:
+          - *n00r
+          - *n00r-laptop

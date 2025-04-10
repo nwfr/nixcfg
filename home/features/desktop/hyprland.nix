@@ -17,9 +17,9 @@ in {
           force_zero_scaling = true;
         };
         "$mainMod" = "SUPER";
-        "$terminal" = "kitty";
-        "$term" = "ghostty";
-        "$fileManager" = "ghostty -e yazi";
+        "$terminal" = "ghostty";
+        "$term" = "kitty";
+        "$fileManager" = "$terminal -e yazi";
         "$fileManager_gui" = "pcmanfm-qt";
         "$browser" = "firefox";
         "$kbd_layout" = "us";

@@ -1,10 +1,12 @@
-{config, ...}: {
+{ config, ... }:
+{
   imports = [
     ../common
     ./dotfiles
     ../features/cli
     ../features/desktop
     ./home.nix
+    ./sops.nix
   ];
 
   features = {
@@ -12,6 +14,11 @@
       fish.enable = true;
       fzf.enable = true;
       neofetch.enable = true;
+      helix.enable = true;
+      ghostty.enable = true;
+      zellij.enable = true;
+      yazi.enable = true;
+      # nvf.enable = true;
     };
     desktop = {
       hyprland.enable = true;
@@ -24,7 +31,7 @@
   wayland.windowManager.hyprland = {
     settings = {
       # Devices
-      device = [];
+      device = [ ];
 
       # Monitors
       monitor = [

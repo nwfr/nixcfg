@@ -6,7 +6,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./disko-conf.nix
@@ -16,7 +17,30 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = [ "ntfs" ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
 
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  security.polkit.enable = true;
+  security.pam.services.gdm.enableGnomeKeyring = true;
+
+  # fileSystems."/bak2" = {
+  #   device = "/dev/disk/by-uuid/037f862f-799f-4b23-8410-f074baa569eb";
+  #   fsType = "ext4";
+  #   options = [ "users" ];
+  # };
+
+  fileSystems."/bak1" = {
+    device = "/dev/disk/by-uuid/51d78895-cedc-d701-0083-8095cedcd701";
+    fsType = "ext4";
+    options = [ "users" ];
+  };
+
+  fileSystems."/data" = {
+    device = "/dev/disk/by-uuid/01D7D434EF2F2070";
+    fsType = "ntfs-3g";
+    options = [ "users" ];
+  };
   networking.hostName = "n00r-laptop"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -60,11 +84,26 @@
   services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
+
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+    graphics = {
+      enable = true;
+    };
+  };
 
   # Enable sound.
   # hardware.pulseaudio.enable = true;
   # OR
+  # rtkit is optional but recommended
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -78,6 +117,23 @@
 
   programs.firefox.enable = true;
 
+  programs.adb.enable = true;
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry-gnome3;
+    settings = {
+      default-cache-ttl = 10800;
+    };
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -86,6 +142,14 @@
     neovim
     git
     gcc
+    go
+    go
+    nil # Nix Language server
+    nixfmt-rfc-style # formatter for Nix code
+    ntfs3g
+    yazi
+    age
+    sops
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -107,11 +171,14 @@
     xwayland.enable = true;
   };
 
+  services.fstrim.enable = true;
+
+  services.upower.enable = true;
   programs.fish.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  # networking.firewall.allowedUfalserts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

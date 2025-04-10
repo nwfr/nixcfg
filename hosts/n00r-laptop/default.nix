@@ -36,7 +36,9 @@
   imports = [
     ../common
     ./configuration.nix
+    ./secrets.nix
     ./services
+    ./sops.nix
   ];
 
   extraServices.podman.enable = true;
