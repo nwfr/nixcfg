@@ -123,14 +123,6 @@
       thunar-volman
     ];
   };
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry-gnome3;
-    settings = {
-      default-cache-ttl = 10800;
-    };
-  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -165,6 +157,9 @@
     settings.PermitRootLogin = "no";
     allowSFTP = true;
   };
+
+  programs.ssh.startAgent = true;
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
