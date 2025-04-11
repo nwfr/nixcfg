@@ -13,8 +13,6 @@
       "wheel"
       "networkmanager"
       "libvirtd"
-      #"flatpak"
-      "audio"
       "video"
       "plugdev"
       "input"

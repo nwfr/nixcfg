@@ -10,7 +10,7 @@
     ./ghostty.nix
     ./zellij.nix
     ./yazi.nix
-    # ./nvf.nix
+    ./nvf.nix
   ];
 
   programs.direnv = {

@@ -23,8 +23,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    agenix.url = "github:ryantm/agenix";
-
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,9 +48,8 @@
       self,
       disko,
       sops-nix,
-      agenix,
       ghostty,
-      # dotfiles,
+      dotfiles,
       nvf,
       home-manager,
       nixpkgs,
@@ -80,7 +77,6 @@
             ./hosts/n00r-laptop
             inputs.disko.nixosModules.disko
             sops-nix.nixosModules.sops
-            agenix.nixosModules.default
           ];
         };
       };

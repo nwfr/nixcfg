@@ -18,7 +18,7 @@
       ghostty.enable = true;
       zellij.enable = true;
       yazi.enable = true;
-      # nvf.enable = true;
+      nvf.enable = true;
     };
     desktop = {
       hyprland.enable = true;

@@ -13,7 +13,6 @@ in
         set -x NIX_PATH nixpkgs=channel:nixos-unstable
         set -x NIX_LOG info
         set -x TERMINAL ghostty
-        source /run/agenix/${config.home.username}-secrets
 
         if test (tty) = "/dev/tty1"
           exec Hyprland &> /dev/null
@@ -56,7 +55,7 @@ in
         ka = "killall";
         sdn = "shutdown -h now";
         e = "$EDITOR .";
-        v = "$EDITOR";
+        v = "nvim";
         t = "tmux";
         z = "zellij";
         zz = "zellij-ps";

@@ -5,10 +5,10 @@
 }:
 {
 
-  home.file.".config/nvim" = {
-    source = "${inputs.dotfiles}/nvim";
-    recursive = true;
-  };
+  # home.file.".config/nvim" = {
+  #   source = "${inputs.dotfiles}/nvim";
+  #   recursive = true;
+  # };
 
   home.file.".config/bat" = {
     source = "${inputs.dotfiles}/bat";
