@@ -7,6 +7,7 @@
     ../features/desktop
     ./home.nix
     ./sops.nix
+    ./git.nix
   ];
 
   features = {
@@ -19,6 +20,7 @@
       zellij.enable = true;
       yazi.enable = true;
       nvf.enable = true;
+      btop.enable = true;
     };
     desktop = {
       hyprland.enable = true;

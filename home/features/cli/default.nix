@@ -11,6 +11,7 @@
     ./zellij.nix
     ./yazi.nix
     ./nvf.nix
+    ./btop.nix
   ];
 
   programs.direnv = {
@@ -27,10 +28,10 @@
     enable = true;
     enableFishIntegration = true;
     enableBashIntegration = true;
+    git = true;
+    icons = "always";
     extraOptions = [
       "-l"
-      "--icons"
-      "--git"
       "-a"
     ];
   };

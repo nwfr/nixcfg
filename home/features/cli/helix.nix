@@ -91,6 +91,25 @@ in
           };
           # rainbow-brackets = true;
         };
+        keys.normal = {
+          space.space = "file_picker";
+          space.w = ":w";
+          space.q = ":q";
+          esc = [
+            "collapse_selection"
+            "keep_primary_selection"
+          ];
+          C-g = [
+            ":write-all"
+            ":new"
+            ":insert-output lazygit"
+            ":set mouse false" # First disable mouse to hint helix into activating it
+            ":set mouse true"
+            ":buffer-close!"
+            ":redraw"
+            ":reload-all"
+          ];
+        };
       };
       languages.language = [
         {

@@ -101,12 +101,6 @@
     XDG_USER_MNT_DIR = "${config.home.homeDirectory}/mnt";
   };
 
-  programs.git = {
-    enable = true;
-    userEmail = "noorweb@noorweb.fr";
-    userName = "nwfr";
-  };
-
   programs.zellij-ps = {
     enable = true;
     projectFolders = [

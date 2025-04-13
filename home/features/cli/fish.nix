@@ -97,7 +97,7 @@ in
         #git
         ga = "git add -A";
         gb = "git branch";
-        gc = "git commit -m";
+        gc = "git commit -m'";
         gl = "git log";
         gm = "git merge";
         gp = "git push -u";
@@ -173,7 +173,7 @@ in
         ptused = "sudo netstat -tulpn | grep LISTEN";
         ptshow = "netstat -lnptu";
         ptlisten = "lsof -i -n | egrep 'COMMAND|LISTEN'";
-        ping = "ping -c 5";
+        ping = "ping -c 3";
         ipe = "curl ipinfo.io/ip";
         ipi = "ipconfig getifaddr wlan0";
 
