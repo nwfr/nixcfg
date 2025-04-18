@@ -43,51 +43,45 @@
     };
   };
 
-  outputs =
-    {
-      self,
-      disko,
-      sops-nix,
-      ghostty,
-      dotfiles,
-      nvf,
-      home-manager,
-      nixpkgs,
-      ...
-    }@inputs:
-    let
-      inherit (self) outputs;
-      systems = [
-        "aarch64-linux"
-        "i686-linux"
-        "x86_64-linux"
-        "aarch64-darwin"
-        "x86_64-darwin"
-      ];
-      forAllSystems = nixpkgs.lib.genAttrs systems;
-    in
-    {
-      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-      overlays = import ./overlays { inherit inputs; };
-      homeManagerModules = import ./modules/home-manager;
-      nixosConfigurations = {
-        n00r-laptop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./hosts/n00r-laptop
-            inputs.disko.nixosModules.disko
-            sops-nix.nixosModules.sops
-          ];
-        };
-      };
-      homeConfigurations = {
-        "n00r@n00r-laptop" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./home/n00r/n00r-laptop.nix
-          ];
-        };
+  outputs = {
+    self,
+    disko,
+    sops-nix,
+    ghostty,
+    dotfiles,
+    nvf,
+    home-manager,
+    nixpkgs,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    systems = [
+      "x86_64-linux"
+    ];
+    forAllSystems = nixpkgs.lib.genAttrs systems;
+  in {
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    overlays = import ./overlays {inherit inputs;};
+    homeManagerModules = import ./modules/home-manager;
+    nixosConfigurations = {
+      n00r-laptop = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/n00r-laptop
+          inputs.disko.nixosModules.disko
+          sops-nix.nixosModules.sops
+        ];
       };
     };
+    homeConfigurations = {
+      "n00r@n00r-laptop" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = {inherit inputs outputs;};
+        home-manager.useUserPackages = true;
+        modules = [
+          ./home/n00r/n00r-laptop.nix
+        ];
+      };
+    };
+  };
 }

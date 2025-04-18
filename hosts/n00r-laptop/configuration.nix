@@ -1,11 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   imports = [
     # Include the results of the hardware scan.
     ./disko-conf.nix
@@ -15,10 +11,10 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = [ "ntfs" ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.supportedFilesystems = ["ntfs"];
+  boot.initrd.kernelModules = ["amdgpu"];
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = ["amdgpu"];
   security.polkit.enable = true;
   security.pam.services.gdm.enableGnomeKeyring = true;
 
@@ -31,13 +27,13 @@
   fileSystems."/bak1" = {
     device = "/dev/disk/by-uuid/51d78895-cedc-d701-0083-8095cedcd701";
     fsType = "ext4";
-    options = [ "users" ];
+    options = ["users"];
   };
 
   fileSystems."/data" = {
     device = "/dev/disk/by-uuid/01D7D434EF2F2070";
     fsType = "ntfs-3g";
-    options = [ "users" ];
+    options = ["users"];
   };
   networking.hostName = "n00r-laptop"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -83,6 +79,12 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 
   services.gvfs.enable = true;
   services.udisks2.enable = true;
@@ -136,12 +138,14 @@
     go
     go
     nil # Nix Language server
+    alejandra # Uncompromising Nix Code Formatter
     nixfmt-rfc-style # formatter for Nix code
     ntfs3g
     yazi
     age
     sops
     lazygit
+    pcmanfm-qt
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
